@@ -1,30 +1,53 @@
 import React from 'react'
 import {  Link } from "react-router-dom";
 
-const ViewEvent = ({event, reducedView=true}) => {
+const ViewEvent = ({ event, reducedView = true }) => {
   return (
-    <div>
-      <ul>
-        <li> ------------------------ </li>
-        <li> Title: {event.title}</li>
-        <li> date: {event.date.toLocaleString()}</li>
+    <div className="card bg-base-100 shadow-xl border border-base-200 max-w-xl mx-auto">
+      <div className="card-body">
+        <div className="flex justify-between items-start">
+          <h2 className="card-title">{event.title}</h2>
+          <span className="text-sm opacity-70">
+            {event.date.toLocaleString()}
+          </span>
+        </div>
+
         {!reducedView && (
-        <>
-          <li> description: {event.description}</li>
-          <li> location: {event.location}</li>
-          <li> latitude: {event.latitude} </li>
-          <li> longitude: {event.longitude}</li>
-          <li> organizerId: {event.organizerId}</li>
-          <li> createdAt: {event.createdAt.toLocaleString()}</li>
-          <li> updatedAt: {event.updatedAt.toLocaleString() }</li>
-        </>)}
-        {reducedView && (
-          <Link to={`/event/${event.id}`}>Full Details</Link>
+          <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm [&>dt]:font-semibold">
+
+            <dt>Description</dt>
+            <dd>{event.description}</dd>
+
+            <dt>Location</dt>
+            <dd>{event.location}</dd>
+
+            <dt>Latitude</dt>
+            <dd>{event.latitude}</dd>
+
+            <dt>Longitude</dt>
+            <dd>{event.longitude}</dd>
+
+            <dt>Organizer ID</dt>
+            <dd>{event.organizerId}</dd>
+
+            <dt>Created</dt>
+            <dd>{event.createdAt.toLocaleString()}</dd>
+
+            <dt>Updated</dt>
+            <dd>{event.updatedAt.toLocaleString()}</dd>
+          </dl>
         )}
-        <li> ################ </li>
-      </ul>
+
+        {reducedView && (
+          <div className="card-actions justify-end mt-4">
+            <Link to={`/event/${event.id}`} className="btn btn-primary btn-sm">
+              Full Details
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default ViewEvent;

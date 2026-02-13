@@ -19,13 +19,7 @@ const Home = () => {
       try {
         const data = await fetchEvents(1, 50);
         if (active) {
-          const normalized = data.results.map(ev => ({
-            ...ev,
-            createdAt: new Date(ev.createdAt),
-            updatedAt: new Date(ev.updatedAt),
-            date: new Date(ev.date)
-          }));
-          setEvents(normalized);
+          setEvents(data.results);
           setLoading(false);
         }
       } catch (err) {
@@ -44,38 +38,26 @@ const Home = () => {
   }, []); //for now only while mounting
 
 
-  if (loading) return <div>Lade Events...</div>;
-  if (error) return <div>Fehler: {error}</div>;
-
+  if (loading) return <div>Loading Events...</div>;
+  if (error) return <div>Error: {error}</div>;
 
   return (
-    <>
-    <h1> home</h1>
+  <section className="max-w-6xl mx-auto px-4 py-6">
+    <h1 className="text-2xl font-semibold mb-6">Upcoming Events</h1>
 
-    <ul>
-        <li>
-          <Link to="/event/1">Event 1</Link>
+    {events.length === 0 && (
+      <p className="text-sm opacity-70">No Events Found</p>
+    )}
+
+    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {events.map((event) => (
+        <li key={event.id}>
+          <EventCard event={event} />
         </li>
-        <li>
-          <Link to="/event/42">Event 42</Link>
-        </li>
-      </ul>
-
-      <ul>
-        {events.map(event => (
-          <li key={event.id}>
-            <div>
-            <EventCard event={event} />
-             </div>
-          </li>
-        ))}
-      </ul>
-
-      {events.length === 0 && <p>Keine Events gefunden.</p>}
-
-
-    </>
-  )
+      ))}
+    </ul>
+  </section>
+);
 }
 
 export default Home;

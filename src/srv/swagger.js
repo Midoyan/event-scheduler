@@ -13,7 +13,6 @@ const fetchEvents = async (page,N) => {
   );
 
   if (!res.ok) {
-    console.log("fetch failed");
     throw new Error("Fetch failed");
   }
 
@@ -36,8 +35,7 @@ const fetchEvents = async (page,N) => {
 };
 
 const fetchOneEvent = async (id) => {
-    let dings=`${BASE_URL}/events/${id}`;
-  console.log("dnigs",dings);
+
   const res = await fetch(
     `${BASE_URL}/events/${id}`,
     { headers: {
@@ -48,12 +46,10 @@ const fetchOneEvent = async (id) => {
   );
 
   if (!res.ok) {
-    console.log("fetch failed");
     throw new Error("Fetch failed");
   }
 
   const data = await res.json();
-  //console.log(data);
   return {
     ...data,
     createdAt: new Date(data.createdAt),

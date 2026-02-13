@@ -3,9 +3,9 @@ import ViewEvent from './ViewEvent';
 
 const EventCard = ({event}) => {
   return (
-    <div>
+    <>
       <ViewEvent event={event} reducedView={true} />
-    </div>
+    </>
   )
 }
 

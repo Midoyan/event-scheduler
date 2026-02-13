@@ -52,7 +52,6 @@ const Event = () => {
   return (
     <>
     <ViewEvent event={event} reducedView={false}/>
-     <Link to="/">Home </Link>
     </>
   )
 }
