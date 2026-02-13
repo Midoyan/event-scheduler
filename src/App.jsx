@@ -1,17 +1,16 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import Home from "./Home"
-import Layout from './Layout'
-import Event from './Event.jsx'
-import NotFound from "./NotFound";
+import HomePage from "./pages/HomePage.jsx"
+import Layout from './layouts/Layout.jsx'
+import Event from './components/Event.jsx'
+import NotFound from "./pages/NotFound.jsx";
 
 
 function App() {
-
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="event/:id" element={<Event />} />
         <Route path="*" element={<NotFound />} />
       </Route>

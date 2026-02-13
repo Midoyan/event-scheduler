@@ -1,19 +1,15 @@
-import React from 'react'
-
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import {fetchOneEvent} from "./srv/swagger";
-import ViewEvent from './ViewEvent';
-
-//import ViewEvent from './ViewEvent';
+import { fetchOneEvent } from "../srv/swagger";
+import ViewEvent from '../ViewEvent';
 
 const Event = () => {
 
-    const { id } = useParams();
+  const { id } = useParams();
 
-    const [event, setEvent] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+  const [event, setEvent] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
 
@@ -42,16 +38,14 @@ const Event = () => {
   }, []); //for now only while mounting
 
 
-  if (loading) return <div>Lade Event...</div>;
-  if (error) return <div>Fehler: {error}</div>;
-
-//console.log("event ",event)
+  if (loading) return <div>Loading event...</div>;
+  if (error) return <div>Error: {error}</div>;
 
 
 
   return (
     <>
-    <ViewEvent event={event} reducedView={false}/>
+      <ViewEvent event={event} reducedView={false} />
     </>
   )
 }

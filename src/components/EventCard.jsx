@@ -1,7 +1,6 @@
-import React from 'react'
-import ViewEvent from './ViewEvent';
+import ViewEvent from '../ViewEvent';
 
-const EventCard = ({event}) => {
+const EventCard = ({ event }) => {
   return (
     <>
       <ViewEvent event={event} reducedView={true} />

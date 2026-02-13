@@ -1,11 +1,8 @@
-import React from 'react'
 import { useState, useEffect } from 'react';
-//import { useParams, Link } from "react-router-dom";
-import {  Link } from "react-router-dom";
-import {fetchEvents} from "./srv/swagger";
-import EventCard from "./EventCard.jsx";
+import { fetchEvents } from "../srv/swagger.js";
+import EventCard from "../components/EventCard.jsx";
 
-const Home = () => {
+const HomePage = () => {
 
   const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -42,22 +39,22 @@ const Home = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-  <section className="max-w-6xl mx-auto px-4 py-6">
-    <h1 className="text-2xl font-semibold mb-6">Upcoming Events</h1>
+    <section className="max-w-6xl mx-auto px-4 py-6">
+      <h1 className="text-2xl font-semibold mb-6">Upcoming Events</h1>
 
-    {events.length === 0 && (
-      <p className="text-sm opacity-70">No Events Found</p>
-    )}
+      {events.length === 0 && (
+        <p className="text-sm opacity-70">No Events Found</p>
+      )}
 
-    <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {events.map((event) => (
-        <li key={event.id}>
-          <EventCard event={event} />
-        </li>
-      ))}
-    </ul>
-  </section>
-);
+      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {events.map((event) => (
+          <li key={event.id}>
+            <EventCard event={event} />
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
 }
 
-export default Home;
+export default HomePage;
