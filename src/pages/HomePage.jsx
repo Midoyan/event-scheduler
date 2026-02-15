@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { fetchEvents } from "../srv/swagger.js";
+import { fetchEvents } from "../api/eventsApi";
 import EventCard from "../components/EventCard.jsx";
 
 const HomePage = () => {
