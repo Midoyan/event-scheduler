@@ -1,6 +1,6 @@
 const AuthForm = ({ onSubmit, isLogin }) => {
     return (
-        <form className="w-100" onSubmit={onSubmit}>
+        <form className="w-100 max-w-full" onSubmit={onSubmit}>
             <h1 className="text-2xl font-semibold mb-6">{isLogin ? "Sign In" : "Sign Up"}</h1>
             <fieldset className="fieldset">
                 <legend className="fieldset-legend">Email:</legend>
