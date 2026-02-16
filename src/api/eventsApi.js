@@ -1,14 +1,23 @@
-// until userlogic is there
-const DEV_TOKEN = import.meta.env.VITE_DEV_TOKEN;
+// base url from .env file
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
+const getAuthTokenOrThrow = () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
+    throw new Error("Could not load API token");
+  }
+  return token;
+};
+
 const fetchEvents = async (page, N) => {
+  const token = getAuthTokenOrThrow();
+
   const res = await fetch(
     `${BASE_URL}/events?page=${page}&limit=${N}`,
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${DEV_TOKEN}`
+        Authorization: `Bearer ${token}`
       }
     }
   );
@@ -35,12 +44,14 @@ const fetchEvents = async (page, N) => {
 };
 
 const fetchOneEvent = async (id) => {
+  const token = getAuthTokenOrThrow();
+
   const res = await fetch(
     `${BASE_URL}/events/${id}`,
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${DEV_TOKEN}`
+        Authorization: `Bearer ${token}`
       }
     }
   );
