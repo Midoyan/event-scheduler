@@ -1,7 +1,7 @@
 const NewEventForm = ({ onSubmit}) => {
     return (
         <form className="w-full max-w-full" onSubmit={onSubmit}>
-            <h1 className="text-2xl font-semibold mb-6">new event</h1>
+            <h1 className="text-2xl font-semibold mb-6">New Event</h1>
 
             {/*title+date+description*/}
             <fieldset className="fieldset space-y-2">

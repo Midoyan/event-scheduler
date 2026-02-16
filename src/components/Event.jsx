@@ -36,7 +36,7 @@ const Event = () => {
     return () => {
       active = false;
     };
-  }, []); //for now only while mounting
+  }, []); //only while mounting
 
 
   if (loading) return <div>Loading event...</div>;

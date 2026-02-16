@@ -1,10 +1,12 @@
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import NewEventForm from "../components/NewEventForm";
 import { fetchCurrentUser } from "../api/authApi";
+import { newEvent } from "../api/eventsApi";
 
 const NewEventPage = () => {
 
     const navigate = useNavigate();
+    const { setReloadFlag } = useOutletContext();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -17,22 +19,17 @@ const NewEventPage = () => {
         ne.location= e.target.location.value;
         ne.latitude= e.target.latitude.value;
         ne.longitude= e.target.longitude.value;
-
-        console.log(e.target.date.value);
-
         ne.date=new Date(e.target.date.value).toISOString();
 
-        const hh=await fetchCurrentUser();
-        if (!hh) return;
-        ne.id=hh.id;
+        const result = await newEvent(ne);
 
-        ne.createdAt=new Date().toISOString();
-        ne.updatedAt=ne.createdAt;
-
-        console.log("new event 1");
-        console.log(ne);
-        console.log("new event 2");
-        navigate("/");
+        if (result.ok) {
+            setReloadFlag(prev => !prev);
+            navigate("/");
+        } else {
+            alert("problem with new event");
+            return null;
+        }
     }
 
 

@@ -8,8 +8,8 @@ const fetchEvents = async (page, N) => {
     throw new Error("Could not load API token");
   }
 
-  console.log("token: ");
-  console.log(DEV_TOKEN);
+  //console.log("token: ");
+  //console.log(DEV_TOKEN);
 
 
   const res = await fetch(
@@ -27,7 +27,7 @@ const fetchEvents = async (page, N) => {
   }
 
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
 
   const normalized = data.results.map(ev => ({
     ...ev,
@@ -73,4 +73,43 @@ const fetchOneEvent = async (id) => {
   };
 };
 
-export { fetchEvents, fetchOneEvent };
+async function newEvent(event) {
+
+    const DEV_TOKEN = localStorage.getItem("token");
+    if (!DEV_TOKEN)  {
+      throw new Error("Could not load API token");
+    }
+
+    const response = await fetch(`${BASE_URL}/events`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${DEV_TOKEN}`
+        },
+        body: JSON.stringify(event)
+    });
+
+    let data=null;
+
+    try {
+        data = await response.json();
+    } catch {
+      data=null;
+    }
+
+
+    /*
+    if (!response.ok) {
+      throw new Error(data?.message || "Failed to create event");
+    }
+
+    console.log(data);
+
+    return data;
+    */
+
+    return { ok: response.ok, data, status: response.status };
+}
+
+
+export { fetchEvents, fetchOneEvent, newEvent };
