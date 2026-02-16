@@ -7,6 +7,8 @@ import NotFound from "./pages/NotFound.jsx";
 import SignInPage from './pages/SignInPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import ProtectedLayout from './layouts/ProtectedLayout.jsx'
+import NewEventPage from './pages/NewEventPage.jsx'
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
         <Route path="event/:id" element={<ProtectedLayout><Event /></ProtectedLayout>} />
         <Route path="login" element={<SignInPage />} />
         <Route path="register" element={<SignUpPage />} />
+	<Route path="newevent" element={<NewEventPage />} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
