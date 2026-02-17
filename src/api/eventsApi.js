@@ -27,7 +27,6 @@ const fetchEvents = async (page, N) => {
   }
 
   const data = await res.json();
-  console.log(data);
 
   const normalized = data.results.map(ev => ({
     ...ev,
@@ -69,4 +68,21 @@ const fetchOneEvent = async (id) => {
   };
 };
 
-export { fetchEvents, fetchOneEvent };
+async function newEvent(event) {
+  const token = getAuthTokenOrThrow();
+
+  const response = await fetch(`${BASE_URL}/events`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(event)
+  });
+
+  const data = await response.json();
+  return data;
+}
+
+
+export { fetchEvents, fetchOneEvent, newEvent };

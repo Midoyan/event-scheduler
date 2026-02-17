@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { fetchEvents } from "../api/eventsApi";
 import EventCard from "../components/EventCard.jsx";
 
@@ -9,7 +10,7 @@ const HomePage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-
+    //console.log("Loading events home page...");
     let active = true;
 
     async function load() {
@@ -32,7 +33,7 @@ const HomePage = () => {
     return () => {
       active = false;
     };
-  }, []); //for now only while mounting
+  }, [setEvents]);
 
 
   if (loading) return <div>Loading Events...</div>;

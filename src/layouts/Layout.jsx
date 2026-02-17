@@ -18,6 +18,7 @@ const Layout = () => {
             <li><Link to="/" className="font-semibold">Home</Link></li>
             {isAuthenticated ? (
               <>
+                <li><Link to="/events/new" className="font-semibold">New Event</Link></li>
                 <li><button className="font-semibold cursor-pointer" onClick={handleLogout}>Sign Out</button></li>
               </>
             ) : (

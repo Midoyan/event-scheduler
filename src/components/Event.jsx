@@ -1,7 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import { fetchOneEvent } from "../api/eventsApi";
+import { fetchOneEvent} from "../api/eventsApi";
 import ViewEvent from '../ViewEvent';
+
 
 const Event = () => {
 
@@ -35,7 +36,7 @@ const Event = () => {
     return () => {
       active = false;
     };
-  }, []); //for now only while mounting
+  }, []); //only while mounting
 
 
   if (loading) return <div>Loading event...</div>;

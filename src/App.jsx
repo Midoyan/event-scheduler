@@ -7,15 +7,18 @@ import NotFound from "./pages/NotFound.jsx";
 import SignInPage from './pages/SignInPage.jsx';
 import SignUpPage from './pages/SignUpPage.jsx';
 import ProtectedLayout from './layouts/ProtectedLayout.jsx'
+import NewEventPage from './pages/NewEventPage.jsx'
+
 
 function App() {
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route path="/" element={<ProtectedLayout><HomePage /></ProtectedLayout>} />
-        <Route path="event/:id" element={<ProtectedLayout><Event /></ProtectedLayout>} />
+        <Route path="events/:id" element={<ProtectedLayout><Event /></ProtectedLayout>} />
         <Route path="login" element={<SignInPage />} />
         <Route path="register" element={<SignUpPage />} />
+	      <Route path="events/new" element={<ProtectedLayout><NewEventPage /></ProtectedLayout>} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>

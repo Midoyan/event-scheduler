@@ -40,3 +40,4 @@ export async function registerUser(email, password) {
 
     return { ok: false, message: result.data.error || "Unknown error" };
 }
+

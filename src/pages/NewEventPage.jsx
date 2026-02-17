@@ -1,0 +1,37 @@
+import { useNavigate } from "react-router-dom";
+import NewEventForm from "../components/NewEventForm";
+import { newEvent } from "../api/eventsApi";
+
+const NewEventPage = () => {
+
+    const navigate = useNavigate();
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+
+        let ne={};
+
+        ne.title= e.target.title.value;
+        ne.date= e.target.title.value;
+        ne.description= e.target.description.value;
+        ne.location= e.target.location.value;
+        ne.latitude= e.target.latitude.value;
+        ne.longitude= e.target.longitude.value;
+        ne.date=new Date(e.target.date.value).toISOString();
+
+        try {
+            const result = await newEvent(ne);
+            navigate("/");
+        } catch {
+            alert("Error while storing new event");
+            return;
+        }
+    }
+
+    return (
+        <NewEventForm onSubmit={handleSubmit}/>
+    )
+
+}
+
+export default NewEventPage;
