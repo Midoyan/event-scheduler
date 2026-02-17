@@ -18,6 +18,9 @@ async function postJson(path, payload) {
             body: JSON.stringify(payload)
         });
 
+        console.log("BLOEDBLOED payload");
+        console.log(payload);
+
         console.log("BLOEDBLOED response");
         console.log(response);
 
