@@ -9,16 +9,20 @@ async function parseJsonSafe(response) {
 }
 
 async function postJson(path, payload) {
-    const response = await fetch(`${BASE_URL}${path}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(payload)
-    });
+    try {
+        const response = await fetch(`${BASE_URL}${path}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
 
-    const data = await parseJsonSafe(response);
-    return { ok: response.ok, data, status: response.status };
+        const data = await parseJsonSafe(response);
+        return { ok: response.ok, data, status: response.status };
+    } catch {
+        return { ok: false, data: {}, status: 0, error: "Network error. Is the backend running?" };
+    }
 }
 
 export async function loginUser(email, password) {
@@ -28,7 +32,7 @@ export async function loginUser(email, password) {
         return { ok: true, token: result.data.token, message: "User signed in successfully" };
     }
 
-    return { ok: false, message: result.data.error || "Unknown error" };
+    return { ok: false, message: result.data.error || result.error || "Unknown error" };
 }
 
 export async function registerUser(email, password) {
@@ -38,6 +42,6 @@ export async function registerUser(email, password) {
         return { ok: true, message: "User created successfully" };
     }
 
-    return { ok: false, message: result.data.error || "Unknown error" };
+    return { ok: false, message: result.data.error || result.error || "Unknown error" };
 }
 
