@@ -6,16 +6,12 @@ import EventCard from "../components/EventCard.jsx";
 
 const HomePage = () => {
 
-  const [events, setEvents] = useState([]);
+  const { events, setEvents } = useOutletContext();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const { reloadFlag } = useOutletContext();
-
-
-
   useEffect(() => {
-
+    console.log("Loading events home page...");
     let active = true;
 
     async function load() {
@@ -38,11 +34,7 @@ const HomePage = () => {
     return () => {
       active = false;
     };
-  }, [reloadFlag]);
-
-  const handleNewEvent = () => {
-    setReloadKey((k) => k + 1); // reload
-  };
+  }, [setEvents]);
 
 
   if (loading) return <div>Loading Events...</div>;

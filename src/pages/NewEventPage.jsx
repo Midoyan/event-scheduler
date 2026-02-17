@@ -1,11 +1,10 @@
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NewEventForm from "../components/NewEventForm";
 import { newEvent } from "../api/eventsApi";
 
 const NewEventPage = () => {
 
     const navigate = useNavigate();
-    const { setReloadFlag } = useOutletContext();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -23,7 +22,6 @@ const NewEventPage = () => {
         const result = await newEvent(ne);
 
         if (result.ok) {
-            setReloadFlag(prev => !prev);
             navigate("/");
         } else {
             alert("problem with new event");

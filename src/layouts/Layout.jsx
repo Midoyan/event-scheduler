@@ -1,10 +1,10 @@
 import { Outlet, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { useState} from 'react';
+import { useState } from 'react';
 
 const Layout = () => {
   const { isAuthenticated, logout } = useAuth();
-  const [reloadFlag, setReloadFlag] = useState(false);
+  const [events, setEvents] = useState([]);
 
   function handleLogout() {
     logout();
@@ -34,7 +34,7 @@ const Layout = () => {
       </header>
 
       <main className="flex-1 max-w-full mx-auto px-4 py-6">
-        <Outlet context={{ reloadFlag, setReloadFlag }} />
+        <Outlet context={{ events, setEvents }} />
       </main>
 
       <footer className="footer footer-center p-6 bg-base-200 text-base-content">
