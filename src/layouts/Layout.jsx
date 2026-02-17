@@ -16,9 +16,9 @@ const Layout = () => {
         <nav className="max-w-6xl mx-auto px-4 py-4">
           <ul className="flex gap-4">
             <li><Link to="/" className="font-semibold">Home</Link></li>
-	<li><Link to="/newevent" className="font-semibold">New Event</Link></li>
             {isAuthenticated ? (
               <>
+                <li><Link to="/events/new" className="font-semibold">New Event</Link></li>
                 <li><button className="font-semibold cursor-pointer" onClick={handleLogout}>Sign Out</button></li>
               </>
             ) : (
