@@ -1,23 +1,23 @@
 // base url from .env file
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const fetchEvents = async (page, N) => {
-
-  const DEV_TOKEN = localStorage.getItem("token");
-  if (!DEV_TOKEN)  {
+const getAuthTokenOrThrow = () => {
+  const token = localStorage.getItem("token");
+  if (!token) {
     throw new Error("Could not load API token");
   }
+  return token;
+};
 
-  //console.log("token: ");
-  //console.log(DEV_TOKEN);
-
+const fetchEvents = async (page, N) => {
+  const token = getAuthTokenOrThrow();
 
   const res = await fetch(
     `${BASE_URL}/events?page=${page}&limit=${N}`,
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${DEV_TOKEN}`
+        Authorization: `Bearer ${token}`
       }
     }
   );
@@ -44,18 +44,14 @@ const fetchEvents = async (page, N) => {
 };
 
 const fetchOneEvent = async (id) => {
-
-  const DEV_TOKEN = localStorage.getItem("token");
-  if (!DEV_TOKEN)  {
-    throw new Error("Could not load API token");
-  }
+  const token = getAuthTokenOrThrow();
 
   const res = await fetch(
     `${BASE_URL}/events/${id}`,
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${DEV_TOKEN}`
+        Authorization: `Bearer ${token}`
       }
     }
   );
@@ -74,17 +70,13 @@ const fetchOneEvent = async (id) => {
 };
 
 async function newEvent(event) {
-
-    const DEV_TOKEN = localStorage.getItem("token");
-    if (!DEV_TOKEN)  {
-      throw new Error("Could not load API token");
-    }
+    const token = getAuthTokenOrThrow();
 
     const response = await fetch(`${BASE_URL}/events`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${DEV_TOKEN}`
+            "Authorization": `Bearer ${token}`
         },
         body: JSON.stringify(event)
     });
