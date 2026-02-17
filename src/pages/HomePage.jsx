@@ -10,7 +10,7 @@ const HomePage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    console.log("Loading events home page...");
+    //console.log("Loading events home page...");
     let active = true;
 
     async function load() {

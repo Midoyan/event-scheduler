@@ -19,13 +19,12 @@ const NewEventPage = () => {
         ne.longitude= e.target.longitude.value;
         ne.date=new Date(e.target.date.value).toISOString();
 
-        const result = await newEvent(ne);
-
-        if (result.ok) {
+        try {
+            const result = await newEvent(ne);
             navigate("/");
-        } else {
-            alert("problem with new event");
-            return null;
+        } catch {
+            alert("Error while storing new event");
+            return;
         }
     }
 

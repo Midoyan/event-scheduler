@@ -39,7 +39,7 @@ const ViewEvent = ({ event, reducedView = true }) => {
 
         {reducedView && (
           <div className="card-actions justify-end mt-4">
-            <Link to={`/event/${event.id}`} className="btn btn-primary btn-sm">
+            <Link to={`/events/${event.id}`} className="btn btn-primary btn-sm">
               Full Details
             </Link>
           </div>

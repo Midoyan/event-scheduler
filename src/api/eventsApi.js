@@ -27,7 +27,6 @@ const fetchEvents = async (page, N) => {
   }
 
   const data = await res.json();
-  //console.log(data);
 
   const normalized = data.results.map(ev => ({
     ...ev,
@@ -70,37 +69,19 @@ const fetchOneEvent = async (id) => {
 };
 
 async function newEvent(event) {
-    const token = getAuthTokenOrThrow();
+  const token = getAuthTokenOrThrow();
 
-    const response = await fetch(`${BASE_URL}/events`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${token}`
-        },
-        body: JSON.stringify(event)
-    });
+  const response = await fetch(`${BASE_URL}/events`, {
+      method: "POST",
+      headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(event)
+  });
 
-    let data=null;
-
-    try {
-        data = await response.json();
-    } catch {
-      data=null;
-    }
-
-
-    /*
-    if (!response.ok) {
-      throw new Error(data?.message || "Failed to create event");
-    }
-
-    console.log(data);
-
-    return data;
-    */
-
-    return { ok: response.ok, data, status: response.status };
+  const data = await response.json();
+  return data;
 }
 
 
