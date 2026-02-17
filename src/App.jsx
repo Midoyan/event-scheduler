@@ -18,7 +18,7 @@ function App() {
         <Route path="event/:id" element={<ProtectedLayout><Event /></ProtectedLayout>} />
         <Route path="login" element={<SignInPage />} />
         <Route path="register" element={<SignUpPage />} />
-	<Route path="newevent" element={<NewEventPage />} />
+	      <Route path="newevent" element={<ProtectedLayout><NewEventPage /></ProtectedLayout>} />
         <Route path="*" element={<NotFound />} />
       </Route>
     </Routes>
