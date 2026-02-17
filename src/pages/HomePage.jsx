@@ -1,12 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useOutletContext } from "react-router-dom";
 
 import { fetchEvents } from "../api/eventsApi";
 import EventCard from "../components/EventCard.jsx";
 
 const HomePage = () => {
 
-  const { events, setEvents } = useOutletContext();
+  const [events, setEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
