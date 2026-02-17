@@ -18,7 +18,14 @@ async function postJson(path, payload) {
             body: JSON.stringify(payload)
         });
 
+        console.log("BLOEDBLOED response");
+        console.log(response);
+
         const data = await parseJsonSafe(response);
+
+        console.log("BLOEDBLOED data");
+        console.log(data);
+
         return { ok: response.ok, data, status: response.status };
     } catch {
         return { ok: false, data: {}, status: 0, error: "Network error. Is the backend running?" };
