@@ -1,6 +1,5 @@
 import { useNavigate, useOutletContext } from "react-router-dom";
 import NewEventForm from "../components/NewEventForm";
-import { fetchCurrentUser } from "../api/authApi";
 import { newEvent } from "../api/eventsApi";
 
 const NewEventPage = () => {
@@ -31,7 +30,6 @@ const NewEventPage = () => {
             return null;
         }
     }
-
 
     return (
         <NewEventForm onSubmit={handleSubmit}/>
