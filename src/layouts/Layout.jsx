@@ -1,8 +1,10 @@
 import { Outlet, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
+import { useState} from 'react';
 
 const Layout = () => {
   const { isAuthenticated, logout } = useAuth();
+  const [reloadFlag, setReloadFlag] = useState(false);
 
   function handleLogout() {
     logout();
@@ -16,6 +18,7 @@ const Layout = () => {
         <nav className="max-w-6xl mx-auto px-4 py-4">
           <ul className="flex gap-4">
             <li><Link to="/" className="font-semibold">Home</Link></li>
+	<li><Link to="/newevent" className="font-semibold">New Event</Link></li>
             {isAuthenticated ? (
               <>
                 <li><button className="font-semibold cursor-pointer" onClick={handleLogout}>Sign Out</button></li>
@@ -31,7 +34,7 @@ const Layout = () => {
       </header>
 
       <main className="flex-1 max-w-full mx-auto px-4 py-6">
-        <Outlet />
+        <Outlet context={{ reloadFlag, setReloadFlag }} />
       </main>
 
       <footer className="footer footer-center p-6 bg-base-200 text-base-content">

@@ -1,23 +1,23 @@
 // base url from .env file
 const BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-const getAuthTokenOrThrow = () => {
-  const token = localStorage.getItem("token");
-  if (!token) {
+const fetchEvents = async (page, N) => {
+
+  const DEV_TOKEN = localStorage.getItem("token");
+  if (!DEV_TOKEN)  {
     throw new Error("Could not load API token");
   }
-  return token;
-};
 
-const fetchEvents = async (page, N) => {
-  const token = getAuthTokenOrThrow();
+  //console.log("token: ");
+  //console.log(DEV_TOKEN);
+
 
   const res = await fetch(
     `${BASE_URL}/events?page=${page}&limit=${N}`,
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${DEV_TOKEN}`
       }
     }
   );
@@ -27,7 +27,7 @@ const fetchEvents = async (page, N) => {
   }
 
   const data = await res.json();
-  console.log(data);
+  //console.log(data);
 
   const normalized = data.results.map(ev => ({
     ...ev,
@@ -44,14 +44,18 @@ const fetchEvents = async (page, N) => {
 };
 
 const fetchOneEvent = async (id) => {
-  const token = getAuthTokenOrThrow();
+
+  const DEV_TOKEN = localStorage.getItem("token");
+  if (!DEV_TOKEN)  {
+    throw new Error("Could not load API token");
+  }
 
   const res = await fetch(
     `${BASE_URL}/events/${id}`,
     {
       headers: {
         Accept: "application/json",
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${DEV_TOKEN}`
       }
     }
   );
@@ -69,4 +73,43 @@ const fetchOneEvent = async (id) => {
   };
 };
 
-export { fetchEvents, fetchOneEvent };
+async function newEvent(event) {
+
+    const DEV_TOKEN = localStorage.getItem("token");
+    if (!DEV_TOKEN)  {
+      throw new Error("Could not load API token");
+    }
+
+    const response = await fetch(`${BASE_URL}/events`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${DEV_TOKEN}`
+        },
+        body: JSON.stringify(event)
+    });
+
+    let data=null;
+
+    try {
+        data = await response.json();
+    } catch {
+      data=null;
+    }
+
+
+    /*
+    if (!response.ok) {
+      throw new Error(data?.message || "Failed to create event");
+    }
+
+    console.log(data);
+
+    return data;
+    */
+
+    return { ok: response.ok, data, status: response.status };
+}
+
+
+export { fetchEvents, fetchOneEvent, newEvent };
