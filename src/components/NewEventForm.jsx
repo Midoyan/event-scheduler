@@ -4,10 +4,10 @@ const NewEventForm = ({ onSubmit}) => {
             <h1 className="text-2xl font-semibold mb-6">New Event</h1>
 
             {/*title+date+description*/}
-            <fieldset className="fieldset space-y-2">
+            <fieldset className="fieldset space-y-2 w-full">
                 <legend className="fieldset-legend">Event:</legend>
                 <label className="form-control flex flex-col md:flex-row md:items-center md:gap-4">
-                     <div className="label">
+                     <div className="label md:w-32">
                     <span className="label-text">Title</span>
                     </div>
                     <input
@@ -19,7 +19,7 @@ const NewEventForm = ({ onSubmit}) => {
                     />
                 </label>
                 <label className="form-control flex flex-col md:flex-row md:items-center md:gap-4">
-                    <div className="label">
+                    <div className="label md:w-32">
                         <span className="label-text">Date</span>
                      </div>
                     <input
@@ -31,7 +31,7 @@ const NewEventForm = ({ onSubmit}) => {
                     />
                 </label>
                 <label className="form-control flex flex-col md:flex-row md:items-center md:gap-4">
-                    <div className="label">
+                    <div className="label md:w-32">
                         <span className="label-text">Description</span>
                     </div>
                     <textarea
@@ -48,7 +48,7 @@ const NewEventForm = ({ onSubmit}) => {
                 <legend className="fieldset-legend">Location</legend>
 
                 <label className="form-control flex flex-col md:flex-row md:items-center md:gap-4">
-                    <div className="label">
+                    <div className="label md:w-32">
                     <span className="label-text">Location</span>
                     </div>
                     <input
@@ -61,7 +61,7 @@ const NewEventForm = ({ onSubmit}) => {
                 </label>
 
                 <label className="form-control flex flex-col md:flex-row md:items-center md:gap-4">
-                    <div className="label">
+                    <div className="label md:w-32">
                     <span className="label-text">Latitude</span>
                     </div>
                     <input
@@ -77,7 +77,7 @@ const NewEventForm = ({ onSubmit}) => {
                 </label>
 
                 <label className="form-control flex flex-col md:flex-row md:items-center md:gap-4">
-                    <div className="label">
+                    <div className="label md:w-32">
                     <span className="label-text">Longitude</span>
                     </div>
                     <input
