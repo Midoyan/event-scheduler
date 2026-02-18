@@ -44,7 +44,6 @@ const fetchEvents = async (page, N) => {
 
 const fetchOneEvent = async (id) => {
   const token = getAuthTokenOrThrow();
-
   const res = await fetch(
     `${BASE_URL}/events/${id}`,
     {
@@ -55,11 +54,16 @@ const fetchOneEvent = async (id) => {
     }
   );
 
-  if (!res.ok) {
+  if (!res.ok || res.status!=200) {
     throw new Error("Fetch failed");
   }
 
   const data = await res.json();
+
+  if (!data) {
+    throw new Error("Fetch failed (data)");
+  }
+
   return {
     ...data,
     createdAt: new Date(data.createdAt),
