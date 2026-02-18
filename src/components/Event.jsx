@@ -6,9 +6,14 @@ import NotFound from "../pages/NotFound";
 
 import { Navigate } from "react-router-dom";
 
+import { useAuth } from "../contexts/AuthContext";
+
 const Event = () => {
 
   const { id } = useParams();
+
+  const { isAuthenticated } = useAuth();
+
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -40,8 +45,17 @@ const Event = () => {
     };
   }, []); //only while mounting
 
+console.log("dibngs", isAuthenticated);
+
 
   if (loading)  return <div>Loading event...</div>;
+
+  console.log("dibngs", isAuthenticated);
+
+  if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
+    }
+
   if (error)    return  <NotFound /> ;
 
   if (event) {
