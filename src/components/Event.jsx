@@ -2,9 +2,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import { fetchOneEvent} from "../api/eventsApi";
 import ViewEvent from '../ViewEvent';
-import NotFound from "../pages/NotFound";
 
-import { Navigate } from "react-router-dom";
 
 const Event = () => {
 
@@ -27,7 +25,7 @@ const Event = () => {
         }
       } catch (err) {
         if (active) {
-          setError(err.message || "Error while loading event");
+          setError(err.message || "Error while loading events");
           setLoading(false);
         }
       }
@@ -41,16 +39,16 @@ const Event = () => {
   }, []); //only while mounting
 
 
-  if (loading)  return <div>Loading event...</div>;
-  if (error)    return  <NotFound /> ;
+  if (loading) return <div>Loading event...</div>;
+  if (error) return <div>Error: {error}</div>;
 
-  if (event) {
+
+
   return (
     <>
       <ViewEvent event={event} reducedView={false} />
     </>
   )
-  } else return false;
 }
 
 export default Event
