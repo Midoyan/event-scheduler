@@ -4,9 +4,14 @@ import { fetchOneEvent} from "../api/eventsApi";
 import ViewEvent from '../ViewEvent';
 
 
+import { useAuth } from "../contexts/AuthContext";
+
 const Event = () => {
 
   const { id } = useParams();
+
+  const { isAuthenticated } = useAuth();
+
 
   const [event, setEvent] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -38,11 +43,19 @@ const Event = () => {
     };
   }, []); //only while mounting
 
-
-  if (loading) return <div>Loading event...</div>;
-  if (error) return <div>Error: {error}</div>;
+console.log("dibngs", isAuthenticated);
 
 
+
+  if (loading)  return <div>Loading event...</div>;
+
+  console.log("dibngs", isAuthenticated);
+
+  if (!isAuthenticated) {
+        return <Navigate to="/login" replace />;
+    }
+
+  if (error)    return  <NotFound /> ;
 
   return (
     <>
